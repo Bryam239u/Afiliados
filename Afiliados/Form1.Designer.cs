@@ -39,24 +39,25 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.dGVAfiliados = new System.Windows.Forms.DataGridView();
-            this.cBNumAf = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cBMunicipio = new System.Windows.Forms.ComboBox();
-            this.chBFecha = new System.Windows.Forms.CheckBox();
-            this.panelFechas = new System.Windows.Forms.Panel();
-            this.dTPInicio = new System.Windows.Forms.DateTimePicker();
-            this.dTPFinal = new System.Windows.Forms.DateTimePicker();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.tBArchivo = new System.Windows.Forms.TextBox();
-            this.tBEstado = new System.Windows.Forms.TextBox();
-            this.ofdExcel = new System.Windows.Forms.OpenFileDialog();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.entidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.municipio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.estatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cBNumAf = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cBMunicipio = new System.Windows.Forms.ComboBox();
+            this.chBFecha = new System.Windows.Forms.CheckBox();
+            this.panelFechas = new System.Windows.Forms.Panel();
+            this.btnFiltrarFecha = new System.Windows.Forms.Button();
+            this.dTPFinal = new System.Windows.Forms.DateTimePicker();
+            this.dTPInicio = new System.Windows.Forms.DateTimePicker();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tBArchivo = new System.Windows.Forms.TextBox();
+            this.tBEstado = new System.Windows.Forms.TextBox();
+            this.ofdExcel = new System.Windows.Forms.OpenFileDialog();
             this.mS1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGVAfiliados)).BeginInit();
             this.panelFechas.SuspendLayout();
@@ -85,7 +86,7 @@
             // salirTSM
             // 
             this.salirTSM.Name = "salirTSM";
-            this.salirTSM.Size = new System.Drawing.Size(180, 22);
+            this.salirTSM.Size = new System.Drawing.Size(96, 22);
             this.salirTSM.Text = "Salir";
             this.salirTSM.Click += new System.EventHandler(this.salirTSM_Click);
             // 
@@ -101,14 +102,14 @@
             // cargarTSM
             // 
             this.cargarTSM.Name = "cargarTSM";
-            this.cargarTSM.Size = new System.Drawing.Size(180, 22);
+            this.cargarTSM.Size = new System.Drawing.Size(109, 22);
             this.cargarTSM.Text = "Cargar";
             this.cargarTSM.Click += new System.EventHandler(this.cargarTSM_Click);
             // 
             // nuevoTSM
             // 
             this.nuevoTSM.Name = "nuevoTSM";
-            this.nuevoTSM.Size = new System.Drawing.Size(180, 22);
+            this.nuevoTSM.Size = new System.Drawing.Size(109, 22);
             this.nuevoTSM.Text = "Nuevo";
             this.nuevoTSM.Click += new System.EventHandler(this.nuevoTSM_Click);
             // 
@@ -161,130 +162,6 @@
             this.dGVAfiliados.Size = new System.Drawing.Size(944, 280);
             this.dGVAfiliados.TabIndex = 2;
             // 
-            // cBNumAf
-            // 
-            this.cBNumAf.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cBNumAf.FormattingEnabled = true;
-            this.cBNumAf.Location = new System.Drawing.Point(233, 492);
-            this.cBNumAf.Name = "cBNumAf";
-            this.cBNumAf.Size = new System.Drawing.Size(145, 32);
-            this.cBNumAf.TabIndex = 3;
-            this.cBNumAf.SelectedIndexChanged += new System.EventHandler(this.cBNumAf_SelectedIndexChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(12, 494);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(215, 25);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Numero De Afilidado:";
-            // 
-            // cBMunicipio
-            // 
-            this.cBMunicipio.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cBMunicipio.FormattingEnabled = true;
-            this.cBMunicipio.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.cBMunicipio.Items.AddRange(new object[] {
-            "------"});
-            this.cBMunicipio.Location = new System.Drawing.Point(142, 136);
-            this.cBMunicipio.Name = "cBMunicipio";
-            this.cBMunicipio.Size = new System.Drawing.Size(236, 32);
-            this.cBMunicipio.TabIndex = 3;
-            this.cBMunicipio.SelectedIndexChanged += new System.EventHandler(this.cBMunicipio_SelectedIndexChanged);
-            // 
-            // chBFecha
-            // 
-            this.chBFecha.AutoSize = true;
-            this.chBFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBFecha.Location = new System.Drawing.Point(17, 541);
-            this.chBFecha.Name = "chBFecha";
-            this.chBFecha.Size = new System.Drawing.Size(83, 28);
-            this.chBFecha.TabIndex = 4;
-            this.chBFecha.Text = "Fecha";
-            this.chBFecha.UseVisualStyleBackColor = true;
-            this.chBFecha.CheckedChanged += new System.EventHandler(this.chBFecha_CheckedChanged);
-            // 
-            // panelFechas
-            // 
-            this.panelFechas.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.panelFechas.Controls.Add(this.dTPFinal);
-            this.panelFechas.Controls.Add(this.dTPInicio);
-            this.panelFechas.Controls.Add(this.label6);
-            this.panelFechas.Controls.Add(this.label5);
-            this.panelFechas.Location = new System.Drawing.Point(12, 575);
-            this.panelFechas.Name = "panelFechas";
-            this.panelFechas.Size = new System.Drawing.Size(326, 121);
-            this.panelFechas.TabIndex = 5;
-            this.panelFechas.Visible = false;
-            // 
-            // dTPInicio
-            // 
-            this.dTPInicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dTPInicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dTPInicio.Location = new System.Drawing.Point(150, 27);
-            this.dTPInicio.MaxDate = new System.DateTime(2030, 12, 31, 0, 0, 0, 0);
-            this.dTPInicio.Name = "dTPInicio";
-            this.dTPInicio.Size = new System.Drawing.Size(132, 29);
-            this.dTPInicio.TabIndex = 0;
-            this.dTPInicio.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            // 
-            // dTPFinal
-            // 
-            this.dTPFinal.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dTPFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dTPFinal.Location = new System.Drawing.Point(150, 74);
-            this.dTPFinal.MaxDate = new System.DateTime(2030, 12, 31, 0, 0, 0, 0);
-            this.dTPFinal.Name = "dTPFinal";
-            this.dTPFinal.Size = new System.Drawing.Size(132, 29);
-            this.dTPFinal.TabIndex = 0;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(16, 30);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(134, 25);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Fecha Inicio:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(16, 77);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(131, 25);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "Fecha Final:";
-            // 
-            // tBArchivo
-            // 
-            this.tBArchivo.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.tBArchivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tBArchivo.Location = new System.Drawing.Point(142, 40);
-            this.tBArchivo.Name = "tBArchivo";
-            this.tBArchivo.ReadOnly = true;
-            this.tBArchivo.Size = new System.Drawing.Size(236, 29);
-            this.tBArchivo.TabIndex = 6;
-            // 
-            // tBEstado
-            // 
-            this.tBEstado.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.tBEstado.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tBEstado.Location = new System.Drawing.Point(142, 89);
-            this.tBEstado.Name = "tBEstado";
-            this.tBEstado.ReadOnly = true;
-            this.tBEstado.Size = new System.Drawing.Size(236, 29);
-            this.tBEstado.TabIndex = 6;
-            // 
-            // ofdExcel
-            // 
-            this.ofdExcel.FileName = "openFileDialog1";
-            this.ofdExcel.Filter = "Archivo de Excel|*.xlsx";
-            // 
             // id
             // 
             this.id.DataPropertyName = "id";
@@ -331,6 +208,141 @@
             this.estatus.Name = "estatus";
             this.estatus.ReadOnly = true;
             this.estatus.Width = 125;
+            // 
+            // cBNumAf
+            // 
+            this.cBNumAf.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cBNumAf.FormattingEnabled = true;
+            this.cBNumAf.Location = new System.Drawing.Point(233, 492);
+            this.cBNumAf.Name = "cBNumAf";
+            this.cBNumAf.Size = new System.Drawing.Size(145, 32);
+            this.cBNumAf.TabIndex = 3;
+            this.cBNumAf.SelectedIndexChanged += new System.EventHandler(this.cBNumAf_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(12, 494);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(215, 25);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Numero De Afilidado:";
+            // 
+            // cBMunicipio
+            // 
+            this.cBMunicipio.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cBMunicipio.FormattingEnabled = true;
+            this.cBMunicipio.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.cBMunicipio.Location = new System.Drawing.Point(142, 136);
+            this.cBMunicipio.Name = "cBMunicipio";
+            this.cBMunicipio.Size = new System.Drawing.Size(236, 32);
+            this.cBMunicipio.TabIndex = 3;
+            this.cBMunicipio.SelectedIndexChanged += new System.EventHandler(this.cBMunicipio_SelectedIndexChanged);
+            // 
+            // chBFecha
+            // 
+            this.chBFecha.AutoSize = true;
+            this.chBFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBFecha.Location = new System.Drawing.Point(17, 541);
+            this.chBFecha.Name = "chBFecha";
+            this.chBFecha.Size = new System.Drawing.Size(83, 28);
+            this.chBFecha.TabIndex = 4;
+            this.chBFecha.Text = "Fecha";
+            this.chBFecha.UseVisualStyleBackColor = true;
+            this.chBFecha.CheckedChanged += new System.EventHandler(this.chBFecha_CheckedChanged);
+            // 
+            // panelFechas
+            // 
+            this.panelFechas.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panelFechas.Controls.Add(this.btnFiltrarFecha);
+            this.panelFechas.Controls.Add(this.dTPFinal);
+            this.panelFechas.Controls.Add(this.dTPInicio);
+            this.panelFechas.Controls.Add(this.label6);
+            this.panelFechas.Controls.Add(this.label5);
+            this.panelFechas.Location = new System.Drawing.Point(12, 575);
+            this.panelFechas.Name = "panelFechas";
+            this.panelFechas.Size = new System.Drawing.Size(498, 121);
+            this.panelFechas.TabIndex = 5;
+            this.panelFechas.Visible = false;
+            // 
+            // btnFiltrarFecha
+            // 
+            this.btnFiltrarFecha.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnFiltrarFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFiltrarFecha.Location = new System.Drawing.Point(336, 44);
+            this.btnFiltrarFecha.Name = "btnFiltrarFecha";
+            this.btnFiltrarFecha.Size = new System.Drawing.Size(85, 42);
+            this.btnFiltrarFecha.TabIndex = 2;
+            this.btnFiltrarFecha.Text = "Filtrar";
+            this.btnFiltrarFecha.UseVisualStyleBackColor = true;
+            this.btnFiltrarFecha.Click += new System.EventHandler(this.btnFiltrarFecha_Click);
+            // 
+            // dTPFinal
+            // 
+            this.dTPFinal.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dTPFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dTPFinal.Location = new System.Drawing.Point(150, 74);
+            this.dTPFinal.MaxDate = new System.DateTime(2030, 12, 31, 0, 0, 0, 0);
+            this.dTPFinal.Name = "dTPFinal";
+            this.dTPFinal.Size = new System.Drawing.Size(132, 29);
+            this.dTPFinal.TabIndex = 0;
+            // 
+            // dTPInicio
+            // 
+            this.dTPInicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dTPInicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dTPInicio.Location = new System.Drawing.Point(150, 27);
+            this.dTPInicio.MaxDate = new System.DateTime(2030, 12, 31, 0, 0, 0, 0);
+            this.dTPInicio.Name = "dTPInicio";
+            this.dTPInicio.Size = new System.Drawing.Size(132, 29);
+            this.dTPInicio.TabIndex = 0;
+            this.dTPInicio.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(16, 77);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(131, 25);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Fecha Final:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(16, 30);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(134, 25);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Fecha Inicio:";
+            // 
+            // tBArchivo
+            // 
+            this.tBArchivo.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tBArchivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tBArchivo.Location = new System.Drawing.Point(142, 40);
+            this.tBArchivo.Name = "tBArchivo";
+            this.tBArchivo.ReadOnly = true;
+            this.tBArchivo.Size = new System.Drawing.Size(236, 29);
+            this.tBArchivo.TabIndex = 6;
+            // 
+            // tBEstado
+            // 
+            this.tBEstado.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tBEstado.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tBEstado.Location = new System.Drawing.Point(142, 89);
+            this.tBEstado.Name = "tBEstado";
+            this.tBEstado.ReadOnly = true;
+            this.tBEstado.Size = new System.Drawing.Size(236, 29);
+            this.tBEstado.TabIndex = 6;
+            // 
+            // ofdExcel
+            // 
+            this.ofdExcel.FileName = "openFileDialog1";
+            this.ofdExcel.Filter = "Archivo de Excel|*.xlsx";
             // 
             // FRMAfiliados
             // 
@@ -395,6 +407,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn estatus;
+        private System.Windows.Forms.Button btnFiltrarFecha;
     }
 }
 

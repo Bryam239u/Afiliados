@@ -4,30 +4,34 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Media;
 
 namespace Afiliados
 {
     public partial class FRMAfiliados : Form
     {
-        bool band;
-        List<string> municipiosC;
-        DataTable dt = new DataTable();
         List<string> columnas;
+        HashSet<string> munis;
+        HashSet<int> ids;
+        DataTable dt;
         public FRMAfiliados()
         {
             InitializeComponent();
-            columnas = new List<string>();
-            columnas.Add("id");
-            columnas.Add("Entidad");
-            columnas.Add("Municipio");
-            columnas.Add("Nombre");
-            columnas.Add("Fecha Afiliacion");
-            columnas.Add("Estatus");
+            columnas = new List<string> { "id", "Entidad", "Municipio", "Nombre", "Fecha Afiliacion", "Estatus" };
+            munis = new HashSet<string>();
+            ids = new HashSet<int>();
+            dt = new DataTable();
+            foreach (var col in columnas)
+            {
+                dt.Columns.Add(col);
+            }
         }
 
         private void salirTSM_Click(object sender, EventArgs e)
@@ -37,103 +41,111 @@ namespace Afiliados
 
         private void cargarTSM_Click(object sender, EventArgs e)
         {
-            tBEstado.Text = "";
-            cBNumAf.Items.Clear();
-            dGVAfiliados.Rows.Clear();
-            dt.Columns.Clear();
-            dt.Rows.Clear();
+            //nuevoTSM_Click(sender, e);
             if (ofdExcel.ShowDialog() == DialogResult.OK)
             {
-                string archivo = ofdExcel.FileName;
-                tBArchivo.Text = ofdExcel.SafeFileName;
-                CargarExcel(archivo);
-                tBEstado.Text = dGVAfiliados.Rows[0].Cells[1].Value.ToString();
+                try
+                {
+                    tBArchivo.Text = ofdExcel.SafeFileName;
+                    string archivo = ofdExcel.FileName;
+                    Thread t1 = new Thread(() => CargarExcel(archivo));
+                    t1.Start();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error " + ex.Message, "Error cargando el archivo");
+                }
+
             }
         }
 
-        private void CargarExcel(string path)
+        private void CargarExcel(String path)
         {
-            municipiosC = new List<string>();
             try
             {
-                ExcelPackage.License.SetNonCommercialPersonal("Jose Luis Mota Espeleta");
-
+                ExcelPackage.License.SetNonCommercialPersonal("Bryam Jaramillo");
                 using (var package = new ExcelPackage(new System.IO.FileInfo(path)))
                 {
+
                     if (package.Workbook.Worksheets.Count == 0)
                     {
                         MessageBox.Show("El archivo de Excel no contiene hojas de trabajo.");
-                        return; //En caso que no haya hojas
+                        return;
                     }
 
                     ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
 
-                    // Leer los encabezados de columna
-                    foreach (var col in columnas)
-                    {
-                        dt.Columns.Add(col);
-                    }
-
-                    // Leer las filas de datos
                     int rowCount = 0;
-                    for (int i = 1; i < worksheet.Dimension.End.Row; i++)
+                    ids.Add(0);
+                    for (int i = 2; i < worksheet.Dimension.End.Row; i++)
                     {
-                       rowCount = rowCount + 1;
+                        rowCount = rowCount + 1;
+                        ids.Add(i-1);
                     }
+                    ids.Add(rowCount+1);
                     rowCount = rowCount + 3;
-                    for (int i = 2; i < rowCount-1; i++)
+                    for (int i = 2; i < rowCount; i++)
                     {
                         DataRow row = dt.NewRow();
+                        munis.Add("TODOS");
+                        string muni = worksheet.Cells[i, 3].Text;
+                        if (!string.IsNullOrEmpty(muni))
+                        {
+                            munis.Add(muni);
+                        }
+                        else
+                        {
+                            munis.Add("NO ESPECIFICADO");
+                        }
+
                         for (int j = 1; j < dt.Columns.Count + 1; j++)
                         {
                             row[j - 1] = worksheet.Cells[i, j].Text;
                         }
                         dt.Rows.Add(row);
                     }
-                }
 
-                // Mostrar los datos en el DataGridView
-                dGVAfiliados.Rows.Add(dt.Rows.Count);
+                    cBMunicipio.Invoke((MethodInvoker)delegate
+                    {
+                        cBMunicipio.DataSource = munis.ToList();
+                    });
 
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    for (int j = 0; j < dt.Columns.Count; j++)
+                    cBNumAf.Invoke((MethodInvoker)delegate
+                    {   
+                        cBNumAf.DataSource = ids.ToList();
+                    });
+
+                    dGVAfiliados.Invoke((MethodInvoker)delegate
                     {
-                        dGVAfiliados.Rows[i].Cells[j].Value = dt.Rows[i][j].ToString();
-                    }
-                    if (dGVAfiliados.Rows[i].Cells[2].Value.ToString() == "")
+                        dGVAfiliados.DataSource = null;
+                        dGVAfiliados.Columns.Clear();
+                        dGVAfiliados.AutoGenerateColumns = true;
+                        dGVAfiliados.DataSource = dt;
+                        dGVAfiliados.Columns["Nombre"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    });
+
+                    this.Invoke((MethodInvoker)delegate
                     {
-                        municipiosC.Add("NO ESPECIFICADO");
-                    }
-                    else
-                    {
-                        municipiosC.Add(dGVAfiliados.Rows[i].Cells[2].Value.ToString());
-                    }
-                    cBNumAf.Items.Add(i + 1);
+                        tBEstado.Text = dGVAfiliados.Rows[1].Cells[1].Value.ToString();
+                    });
                 }
-                try
-                {
-                    band = true;
-                    List<string> municipios = municipiosC.Distinct().ToList();
-                    cBMunicipio.SelectedIndex = -1;
-                    cBMunicipio.DataSource = municipios;
-                    cBMunicipio.SelectedIndex = -1;
-                }
-                finally
-                {
-                    band = false;
-                }
-                
             }
-            catch(Exception e) 
+            catch (Exception ex)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show("Error " + ex.Message, "Error al cargar el Excel");
             }
         }
 
         private void nuevoTSM_Click(object sender, EventArgs e)
         {
+            dGVAfiliados.DataSource = null;
             dGVAfiliados.Rows.Clear();
+            dGVAfiliados.DataSource = dt;
+            dGVAfiliados.Columns["Nombre"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            cBMunicipio.DataSource = new List<string>() {"."};
+            cBNumAf.DataSource = new List<int>() {-1};
+            tBEstado.Text = "";
+            tBArchivo.Text = "";
         }
 
         private void chBFecha_CheckedChanged(object sender, EventArgs e)
@@ -152,27 +164,55 @@ namespace Afiliados
         {
             dGVAfiliados.DataSource = dt;
             DataView vista = dt.DefaultView;
-            vista.RowFilter = $"id = '{(int)cBNumAf.SelectedItem}'";
+            if ((int)cBNumAf.SelectedItem == 0)
+            {
+                vista.RowFilter = "";
+            }
+            else
+            {
+                vista.RowFilter = $"id = '{(int)cBNumAf.SelectedItem}'";
+            }
         }
 
         private void cBMunicipio_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(band)
+            
+            dGVAfiliados.DataSource = dt;
+            DataView vista = dt.DefaultView;
+            if (cBMunicipio.SelectedItem == "TODOS")
             {
-                return;
+                vista.RowFilter = "";
+            }
+            else if(cBMunicipio.SelectedItem == "NO ESPECIFICADO")
+            {
+                vista.RowFilter = $"Municipio = '{""}'";
             }
             else
             {
-                dGVAfiliados.DataSource = dt;
-                DataView vista = dt.DefaultView;
-                if(cBMunicipio.SelectedItem == "NO ESPECIFICADO")
-                {
-                    vista.RowFilter = $"Municipio = '{""}'";
-                }
-                else
-                {
-                    vista.RowFilter = $"Municipio = '{cBMunicipio.SelectedItem.ToString()}'";
-                }
+                vista.RowFilter = $"Municipio = '{cBMunicipio.SelectedItem.ToString()}'";
+            }
+            
+        }
+
+        private void btnFiltrarFecha_Click(object sender, EventArgs e)
+        {
+            DateTime inicio = dTPInicio.Value.Date;
+            DateTime fin = dTPFinal.Value.Date;
+
+            dGVAfiliados.DataSource = dt;
+            DataView vista = dt.DefaultView;
+
+            string colFecha = "Fecha Afiliacion";
+
+            try
+            {
+                string filtro = $"CONVERT([{colFecha}], 'System.DateTime') >= #{inicio:MM/dd/yyyy}# AND " + 
+                                $"CONVERT([{colFecha}], 'System.DateTime') <= #{fin:MM/dd/yyyy}#";
+                vista.RowFilter = filtro;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }
