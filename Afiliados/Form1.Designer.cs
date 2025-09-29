@@ -169,6 +169,7 @@
             this.cBNumAf.Name = "cBNumAf";
             this.cBNumAf.Size = new System.Drawing.Size(145, 32);
             this.cBNumAf.TabIndex = 3;
+            this.cBNumAf.SelectedIndexChanged += new System.EventHandler(this.cBNumAf_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -184,10 +185,14 @@
             // 
             this.cBMunicipio.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cBMunicipio.FormattingEnabled = true;
+            this.cBMunicipio.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.cBMunicipio.Items.AddRange(new object[] {
+            "------"});
             this.cBMunicipio.Location = new System.Drawing.Point(142, 136);
             this.cBMunicipio.Name = "cBMunicipio";
-            this.cBMunicipio.Size = new System.Drawing.Size(170, 32);
+            this.cBMunicipio.Size = new System.Drawing.Size(236, 32);
             this.cBMunicipio.TabIndex = 3;
+            this.cBMunicipio.SelectedIndexChanged += new System.EventHandler(this.cBMunicipio_SelectedIndexChanged);
             // 
             // chBFecha
             // 
@@ -199,6 +204,7 @@
             this.chBFecha.TabIndex = 4;
             this.chBFecha.Text = "Fecha";
             this.chBFecha.UseVisualStyleBackColor = true;
+            this.chBFecha.CheckedChanged += new System.EventHandler(this.chBFecha_CheckedChanged);
             // 
             // panelFechas
             // 
@@ -209,24 +215,29 @@
             this.panelFechas.Controls.Add(this.label5);
             this.panelFechas.Location = new System.Drawing.Point(12, 575);
             this.panelFechas.Name = "panelFechas";
-            this.panelFechas.Size = new System.Drawing.Size(500, 121);
+            this.panelFechas.Size = new System.Drawing.Size(326, 121);
             this.panelFechas.TabIndex = 5;
             this.panelFechas.Visible = false;
             // 
             // dTPInicio
             // 
             this.dTPInicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dTPInicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dTPInicio.Location = new System.Drawing.Point(150, 27);
+            this.dTPInicio.MaxDate = new System.DateTime(2030, 12, 31, 0, 0, 0, 0);
             this.dTPInicio.Name = "dTPInicio";
-            this.dTPInicio.Size = new System.Drawing.Size(336, 29);
+            this.dTPInicio.Size = new System.Drawing.Size(132, 29);
             this.dTPInicio.TabIndex = 0;
+            this.dTPInicio.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             // 
             // dTPFinal
             // 
             this.dTPFinal.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dTPFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dTPFinal.Location = new System.Drawing.Point(150, 74);
+            this.dTPFinal.MaxDate = new System.DateTime(2030, 12, 31, 0, 0, 0, 0);
             this.dTPFinal.Name = "dTPFinal";
-            this.dTPFinal.Size = new System.Drawing.Size(336, 29);
+            this.dTPFinal.Size = new System.Drawing.Size(132, 29);
             this.dTPFinal.TabIndex = 0;
             // 
             // label5
@@ -266,7 +277,7 @@
             this.tBEstado.Location = new System.Drawing.Point(142, 89);
             this.tBEstado.Name = "tBEstado";
             this.tBEstado.ReadOnly = true;
-            this.tBEstado.Size = new System.Drawing.Size(170, 29);
+            this.tBEstado.Size = new System.Drawing.Size(236, 29);
             this.tBEstado.TabIndex = 6;
             // 
             // ofdExcel
@@ -276,12 +287,14 @@
             // 
             // id
             // 
+            this.id.DataPropertyName = "id";
             this.id.HeaderText = "ID";
             this.id.Name = "id";
             this.id.ReadOnly = true;
             // 
             // entidad
             // 
+            this.entidad.DataPropertyName = "Entidad";
             this.entidad.HeaderText = "Entidad";
             this.entidad.Name = "entidad";
             this.entidad.ReadOnly = true;
@@ -289,6 +302,7 @@
             // 
             // municipio
             // 
+            this.municipio.DataPropertyName = "Municipio";
             this.municipio.HeaderText = "Municipio";
             this.municipio.Name = "municipio";
             this.municipio.ReadOnly = true;
@@ -296,6 +310,7 @@
             // 
             // nombre
             // 
+            this.nombre.DataPropertyName = "Nombre";
             this.nombre.HeaderText = "Nombre";
             this.nombre.Name = "nombre";
             this.nombre.ReadOnly = true;
@@ -303,6 +318,7 @@
             // 
             // fecha
             // 
+            this.fecha.DataPropertyName = "Fecha Afiliacion";
             this.fecha.HeaderText = "Fecha Afiliacion";
             this.fecha.Name = "fecha";
             this.fecha.ReadOnly = true;
@@ -310,6 +326,7 @@
             // 
             // estatus
             // 
+            this.estatus.DataPropertyName = "Estatus";
             this.estatus.HeaderText = "Estatus";
             this.estatus.Name = "estatus";
             this.estatus.ReadOnly = true;
