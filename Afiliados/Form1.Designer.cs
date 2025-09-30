@@ -45,7 +45,6 @@
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.estatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cBNumAf = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.cBMunicipio = new System.Windows.Forms.ComboBox();
             this.chBFecha = new System.Windows.Forms.CheckBox();
@@ -58,6 +57,9 @@
             this.tBArchivo = new System.Windows.Forms.TextBox();
             this.tBEstado = new System.Windows.Forms.TextBox();
             this.ofdExcel = new System.Windows.Forms.OpenFileDialog();
+            this.tBNumAf = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lbAf = new System.Windows.Forms.Label();
             this.mS1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGVAfiliados)).BeginInit();
             this.panelFechas.SuspendLayout();
@@ -102,14 +104,14 @@
             // cargarTSM
             // 
             this.cargarTSM.Name = "cargarTSM";
-            this.cargarTSM.Size = new System.Drawing.Size(109, 22);
+            this.cargarTSM.Size = new System.Drawing.Size(180, 22);
             this.cargarTSM.Text = "Cargar";
             this.cargarTSM.Click += new System.EventHandler(this.cargarTSM_Click);
             // 
             // nuevoTSM
             // 
             this.nuevoTSM.Name = "nuevoTSM";
-            this.nuevoTSM.Size = new System.Drawing.Size(109, 22);
+            this.nuevoTSM.Size = new System.Drawing.Size(180, 22);
             this.nuevoTSM.Text = "Nuevo";
             this.nuevoTSM.Click += new System.EventHandler(this.nuevoTSM_Click);
             // 
@@ -208,16 +210,6 @@
             this.estatus.Name = "estatus";
             this.estatus.ReadOnly = true;
             this.estatus.Width = 125;
-            // 
-            // cBNumAf
-            // 
-            this.cBNumAf.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cBNumAf.FormattingEnabled = true;
-            this.cBNumAf.Location = new System.Drawing.Point(233, 492);
-            this.cBNumAf.Name = "cBNumAf";
-            this.cBNumAf.Size = new System.Drawing.Size(145, 32);
-            this.cBNumAf.TabIndex = 3;
-            this.cBNumAf.SelectedIndexChanged += new System.EventHandler(this.cBNumAf_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -323,7 +315,7 @@
             // 
             this.tBArchivo.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tBArchivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tBArchivo.Location = new System.Drawing.Point(142, 40);
+            this.tBArchivo.Location = new System.Drawing.Point(142, 33);
             this.tBArchivo.Name = "tBArchivo";
             this.tBArchivo.ReadOnly = true;
             this.tBArchivo.Size = new System.Drawing.Size(236, 29);
@@ -333,7 +325,7 @@
             // 
             this.tBEstado.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tBEstado.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tBEstado.Location = new System.Drawing.Point(142, 89);
+            this.tBEstado.Location = new System.Drawing.Point(142, 87);
             this.tBEstado.Name = "tBEstado";
             this.tBEstado.ReadOnly = true;
             this.tBEstado.Size = new System.Drawing.Size(236, 29);
@@ -344,22 +336,53 @@
             this.ofdExcel.FileName = "openFileDialog1";
             this.ofdExcel.Filter = "Archivo de Excel|*.xlsx";
             // 
+            // tBNumAf
+            // 
+            this.tBNumAf.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tBNumAf.Location = new System.Drawing.Point(233, 491);
+            this.tBNumAf.Name = "tBNumAf";
+            this.tBNumAf.Size = new System.Drawing.Size(153, 31);
+            this.tBNumAf.TabIndex = 7;
+            this.tBNumAf.TextChanged += new System.EventHandler(this.tBNumAf_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(498, 138);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(150, 25);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "Num Afiliados:";
+            // 
+            // lbAf
+            // 
+            this.lbAf.AutoSize = true;
+            this.lbAf.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbAf.Location = new System.Drawing.Point(654, 138);
+            this.lbAf.Name = "lbAf";
+            this.lbAf.Size = new System.Drawing.Size(30, 25);
+            this.lbAf.TabIndex = 1;
+            this.lbAf.Text = "...";
+            // 
             // FRMAfiliados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(985, 702);
+            this.Controls.Add(this.tBNumAf);
             this.Controls.Add(this.tBEstado);
             this.Controls.Add(this.tBArchivo);
             this.Controls.Add(this.panelFechas);
             this.Controls.Add(this.chBFecha);
             this.Controls.Add(this.cBMunicipio);
-            this.Controls.Add(this.cBNumAf);
             this.Controls.Add(this.dGVAfiliados);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.lbAf);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.mS1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -389,7 +412,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView dGVAfiliados;
-        private System.Windows.Forms.ComboBox cBNumAf;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cBMunicipio;
         private System.Windows.Forms.CheckBox chBFecha;
@@ -408,6 +430,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn estatus;
         private System.Windows.Forms.Button btnFiltrarFecha;
+        private System.Windows.Forms.TextBox tBNumAf;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lbAf;
     }
 }
 

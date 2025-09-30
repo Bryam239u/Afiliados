@@ -19,14 +19,12 @@ namespace Afiliados
     {
         List<string> columnas;
         HashSet<string> munis;
-        HashSet<int> ids;
         DataTable dt;
         public FRMAfiliados()
         {
             InitializeComponent();
             columnas = new List<string> { "id", "Entidad", "Municipio", "Nombre", "Fecha Afiliacion", "Estatus" };
             munis = new HashSet<string>();
-            ids = new HashSet<int>();
             dt = new DataTable();
             foreach (var col in columnas)
             {
@@ -41,7 +39,7 @@ namespace Afiliados
 
         private void cargarTSM_Click(object sender, EventArgs e)
         {
-            //nuevoTSM_Click(sender, e);
+            nuevoTSM_Click(sender, e);
             if (ofdExcel.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -55,7 +53,6 @@ namespace Afiliados
                 {
                     MessageBox.Show("Error " + ex.Message, "Error cargando el archivo");
                 }
-
             }
         }
 
@@ -76,13 +73,12 @@ namespace Afiliados
                     ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
 
                     int rowCount = 0;
-                    ids.Add(0);
                     for (int i = 2; i < worksheet.Dimension.End.Row; i++)
                     {
                         rowCount = rowCount + 1;
-                        ids.Add(i-1);
+                        
                     }
-                    ids.Add(rowCount+1);
+                    
                     rowCount = rowCount + 3;
                     for (int i = 2; i < rowCount; i++)
                     {
@@ -110,11 +106,6 @@ namespace Afiliados
                         cBMunicipio.DataSource = munis.ToList();
                     });
 
-                    cBNumAf.Invoke((MethodInvoker)delegate
-                    {   
-                        cBNumAf.DataSource = ids.ToList();
-                    });
-
                     dGVAfiliados.Invoke((MethodInvoker)delegate
                     {
                         dGVAfiliados.DataSource = null;
@@ -122,6 +113,7 @@ namespace Afiliados
                         dGVAfiliados.AutoGenerateColumns = true;
                         dGVAfiliados.DataSource = dt;
                         dGVAfiliados.Columns["Nombre"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        lbAf.Text = dGVAfiliados.Rows.Count.ToString();
                     });
 
                     this.Invoke((MethodInvoker)delegate
@@ -141,42 +133,30 @@ namespace Afiliados
             dGVAfiliados.DataSource = null;
             dGVAfiliados.Rows.Clear();
             dGVAfiliados.DataSource = dt;
+            dt.Rows.Clear();
             dGVAfiliados.Columns["Nombre"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            cBMunicipio.DataSource = new List<string>() {"."};
-            cBNumAf.DataSource = new List<int>() {-1};
+            cBMunicipio.DataSource = new List<string>() { "." };
             tBEstado.Text = "";
             tBArchivo.Text = "";
         }
 
         private void chBFecha_CheckedChanged(object sender, EventArgs e)
         {
-            if(chBFecha.Checked == true)
+            dGVAfiliados.DataSource = dt;
+            DataView vista = dt.DefaultView;
+            if (chBFecha.Checked == true)
             {
                 panelFechas.Visible = true;
             }
             else
             {
                 panelFechas.Visible = false;
-            }
-        }
-
-        private void cBNumAf_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            dGVAfiliados.DataSource = dt;
-            DataView vista = dt.DefaultView;
-            if ((int)cBNumAf.SelectedItem == 0)
-            {
                 vista.RowFilter = "";
-            }
-            else
-            {
-                vista.RowFilter = $"id = '{(int)cBNumAf.SelectedItem}'";
             }
         }
 
         private void cBMunicipio_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
             dGVAfiliados.DataSource = dt;
             DataView vista = dt.DefaultView;
             if (cBMunicipio.SelectedItem == "TODOS")
@@ -213,6 +193,20 @@ namespace Afiliados
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void tBNumAf_TextChanged(object sender, EventArgs e)
+        {
+            dGVAfiliados.DataSource = dt;
+            DataView vista = dt.DefaultView;
+            if (tBNumAf.Text == "")
+            {
+                vista.RowFilter = "";
+            }
+            else
+            {
+                vista.RowFilter = $"id = '{tBNumAf.Text}'";
             }
         }
     }
